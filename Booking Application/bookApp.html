@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a call</title>
+    <link rel="stylesheet" href="bookApp.css">
+</head>
+<body>
+    
+    <form action="backend.php" onsubmit="getCallDetails(event)">
+
+        <h1>Book a call</h1>
+        <p>Book a call slot and our representative will call you within 1hr of selected time</p>
+        <hr>
+        <label for="fname">Name:</label>
+        <div>
+            <input type="text" name="fname" id="fname">
+        </div>
+        <br>
+
+        <label for="myEmail">Email:</label>
+        <div>
+            <input type="email" name="myEmail" id="myEmail">
+        </div>
+        <br>
+
+        <label for="myPhone">Phone:</label>
+        <div>
+            <input type="tel" name="myPhone" id="myPhone">
+        </div>
+        <br>
+
+        <label for="myDate">Time for call:</label>
+        <div>
+            <input type="date" name="myDate" id="myDate">
+            <input type="time" name="myTime" id="myTime">
+        </div>
+        <br>
+
+        <input type="submit" name="sub" value="GET A CALL" id="getCall">
+
+    </form>
+
+    <script src="bookApp.js"></script>
+</body>
+</html>
