@@ -7,7 +7,7 @@ function getCallDetails(event){
     const date = document.getElementById('myDate').value;
     const time = document.getElementById('myTime').value;
 
-    const randomId = Math.random().toString(16).slice(2);
+    const randomId = Math.random().toString(16).slice(2); //Random key value pairs
     console.log(randomId);
     
     const myDetails = {
