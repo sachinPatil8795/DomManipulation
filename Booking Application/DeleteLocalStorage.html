@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous" />
+</head>
+
+<body>
+    <div class="container my-4 d-flex justify-content-center">
+        <form class="col-md-4">
+            <h1 class="my-4">Form</h1>
+            Name:
+            <input type="text" id="name" class="form-control form-control-sm" value="" />
+            Email:
+            <input type="email" id="email" class="form-control form-control-sm" value="" />
+
+            <input type="text" id="tempId" class="form-control form-control-sm" hidden />
+
+            <input type="button" class="btn btn-info my-2" value="+Add" id="add" onclick="savedetail()" />
+            <input type="button" class="btn btn-warning my-2" value="update" id="update" onclick="saveEdit()"
+                style="display: none" />
+        </form>
+        
+    </div>
+
+    <div class="container">
+        <div class="row" id="scontainer">
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        function savedetail() {
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let obj = {
+                id: Math.random().toString(16).slice(2),
+                name: name,
+                email: email,
+            };
+            localStorage.setItem(obj.id, JSON.stringify(obj));
+            console.log("data saved");
+            showCards();
+        }
+        showCards();
+
+        function showCards() {
+            let items = getAllKeys();
+            let item;
+            $("#scontainer").html("");
+            for (let i = 0; i < items.length; i++) {
+                item = localStorage.getItem(items[i]);
+                item = JSON.parse(item);
+                $("#scontainer").append(`<div class="card m-1 p-3" style="width:16rem">
+                                        <h5 class="card-title">${item.name}</h5>
+                                        <h5 class="card-title">${item.email}</h5>
+                                        <button  onClick="update('${item.id}','${item.name}','${item.email}')"  class="btn  btn-info btn-sm my-1">Edit</button>
+                                        <button onClick="DeleteItem('${item.id}')" class="btn  btn-danger btn-sm my-1">Delete</button>
+                                    </div>`);
+            }
+        }
+
+        function getAllKeys() {
+            let values = [];
+            let keys = Object.keys(localStorage);
+            for (let i = 0; i < keys.length; i++) {
+                values.push(keys[i]);
+            }
+            return values;
+        }
+
+        function DeleteItem(id, name) {
+            if (confirm("Conform!")) {
+                localStorage.removeItem(id);
+                alert(`${name} deleted!`);
+                showCards();
+            }
+        }
+
+        function update(id, name, email) {
+            document.getElementById("update").style.display = '';
+            document.getElementById("add").style.display = 'none';
+
+            document.getElementById("name").value = name;
+            document.getElementById("email").value = email;
+            document.getElementById("tempId").value = id;
+            document.getElementById("name").style.borderColor = 'green';
+            document.getElementById("email").style.borderColor = 'green';
+
+        }
+
+        function saveEdit() {
+            let name = document.getElementById("name").value
+            let email = document.getElementById("email").value
+            let id = document.getElementById("tempId").value
+            ChangeStatus(id, name, email)
+        }
+        function ChangeStatus(id, name, email) {
+
+            if (confirm("Conform!")) {
+                const mytasksUpdate = {
+                    id: id,
+                    name: name,
+                    email: email,
+                };
+                localStorage.setItem(id, JSON.stringify(mytasksUpdate));
+                showCards();
+            }
+
+            document.getElementById("update").style.display = 'none'
+            document.getElementById("add").style.display = 'block'
+            document.getElementById("name").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("tempId").value = "";
+        }
+    </script>
+</body>
+
+</html>

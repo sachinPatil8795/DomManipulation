@@ -8,7 +8,6 @@ function getCallDetails(event) {
   const time = document.getElementById("myTime").value;
 
   const randomId = Math.random().toString(16).slice(2); //Random key value pairs
-  console.log(randomId);
 
   const myDetails = {
     Name: name,
@@ -21,25 +20,28 @@ function getCallDetails(event) {
   localStorage.setItem(randomId, JSON.stringify(myDetails));
 }
 
-function getAllkeys(){
+function getAllkeys() {
   const myKey = Object.keys(localStorage);
   return myKey;
-  
 }
 
 //Display the content of the local storage on an HTML page
-function DisplayKeyValue(){
+function DisplayKeyValue() {
   const myValues = getAllkeys();
-  const ul = document.getElementById('myVal');
-  
+  const ul = document.getElementById("myVal");
 
-  for(let i = 0; i < myValues.length; i++){
+  for (let i = 0; i < myValues.length; i++) {
     const val = JSON.parse(localStorage.getItem(myValues[i]));
-    const li = document.createElement('li');
+    const li = document.createElement("li");
 
-    li.innerHTML = `${val.Name} ${val.Email} ${val.PhoneNo} ${val.Date} ${val.Time}`
+    li.innerHTML = `${val.Name} ${val.Email} ${val.PhoneNo} ${val.Date} ${val.Time}`;
     ul.appendChild(li);
-    
   }
 }
 DisplayKeyValue();
+
+//Creating delete button
+const deleteBtn = document.createElement("button");
+deleteBtn.id = "delBtn";
+deleteBtn.appendChild(document.createTextNode("Delete"));
+li.appendChild(deleteBtn);
