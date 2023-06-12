@@ -22,7 +22,7 @@ function addItem(e) {
   // Create new li element
   var li = document.createElement("li");
 
-  // Add class ti li
+  // Add class to li
   li.className = "list-group-item";
 
   // Add text node with input value
