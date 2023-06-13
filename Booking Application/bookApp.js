@@ -34,6 +34,7 @@ function getCallDetails(event) {
     .catch((error) => {
       console.error("Error storing appointment Details:", error);
     });
+  
 }
 
 function getAllkeys() {
@@ -50,7 +51,7 @@ function DisplayKeyValue() {
     const val = JSON.parse(localStorage.getItem(myValues[i]));
     const li = document.createElement("li");
 
-    li.innerHTML = `${val.Name} ${val.Email} ${val.PhoneNo} ${val.Date} ${val.Time}`;
+    li.textContent = `${val.Name} ${val.Email} ${val.PhoneNo} ${val.Date} ${val.Time}`;
     ul.appendChild(li);
   }
 }
