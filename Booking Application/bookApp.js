@@ -18,6 +18,22 @@ function getCallDetails(event) {
     Id: randomId,
   };
   localStorage.setItem(randomId, JSON.stringify(myDetails));
+ 
+
+  // Make a POST request to crudcrud.com
+  axios
+    .post(
+      "https://crudcrud.com/api/d5d9a8120e544df7b9a36588fb2e11a6/appointmentData",
+      myDetails)
+    .then((response) => {
+      console.log(
+        "Appointment details successfully stored in the cloud:",
+        response.data
+      );
+    })
+    .catch((error) => {
+      console.error("Error storing appointment Details:", error);
+    });
 }
 
 function getAllkeys() {
@@ -39,9 +55,3 @@ function DisplayKeyValue() {
   }
 }
 DisplayKeyValue();
-
-//Creating delete button
-const deleteBtn = document.createElement("button");
-deleteBtn.id = "delBtn";
-deleteBtn.appendChild(document.createTextNode("Delete"));
-li.appendChild(deleteBtn);
